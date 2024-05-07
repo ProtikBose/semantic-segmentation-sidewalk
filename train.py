@@ -368,8 +368,9 @@ def main():
     elif args.snapshot:
         if 'ASSETS_PATH' in args.snapshot:
             args.snapshot = args.snapshot.replace('ASSETS_PATH', cfg.ASSETS_PATH)
-        checkpoint = torch.load(args.snapshot,
-                                map_location=torch.device('cpu'))
+
+        print(args.snapshot)    
+        checkpoint = torch.load(args.snapshot, map_location=torch.device('cuda'))
         args.restore_net = True
         msg = "Loading weights from: checkpoint={}".format(args.snapshot)
         logx.msg(msg)
